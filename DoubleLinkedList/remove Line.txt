@@ -1,0 +1,36 @@
+public boolean removeLine(String linha) {
+        Node pAnt = null, pAnda;
+        if (isEmpty()) return false; // Empty list
+        else {
+            pAnda = head;
+            int contador = 0;
+            // procura a posição do elemento na lista
+            while ((contador != count) && !(pAnda.getLinha().equals(linha))) {
+                pAnt = pAnda;
+                pAnda = pAnda.getProx();
+                contador++;
+            }
+            if ((contador == count) && !(pAnda.getLinha().equals(linha)))
+                return false; // Se não encontrou o elemento
+                // Se elemento encontrado remove da lista
+            else {
+                // se o elemento encontrado está na cabeça da lista
+                // e tem somente um elemento
+                if ((head == pAnda && count == 1)) {
+                    head = null;
+                    tail = null;
+                    // está no cabeça e tem mais elementos
+                } else if ((head == pAnda && count != 1)) {
+                    head = head.getProx();
+                    tail.setProx(head);
+                } else {// remove elemento do meio/fim
+                    // Se o elemento estiver no fim
+                    if (pAnda == tail)
+                        tail = pAnt; // Atualiza o fim
+                    pAnt.setProx(pAnda.getProx());
+                }
+                count--;
+                return true;
+            }
+        }
+    } // Final do método removeLine
